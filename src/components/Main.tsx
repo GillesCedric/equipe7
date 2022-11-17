@@ -4,7 +4,7 @@ import Map from './Map'
 import Header from './Header'
 import Footer from './Footer'
 import PlacesModel, { Coordinates, List } from '../models/Places'
-import Modal from './Modal'
+import Modal from './Cart'
 
 
 interface PropsMain {

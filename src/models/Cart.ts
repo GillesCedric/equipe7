@@ -30,7 +30,10 @@ export default class CartModel {
 	}
 
 	public static readonly remove = (id: number) => {
-		CartModel.cart = CartModel.cart.filter(value => value.id != id)
+		let cart = this.get() as Cart[]
+		cart = cart.filter(value => value.id != id)
+		CartModel.cart = cart
+		//console.log(CartModel.cart)
 		this.save()
 		return true
 	}
@@ -39,13 +42,13 @@ export default class CartModel {
 		Storage.set('cart', CartModel.cart)
 	}
 
-	public static readonly getItems = (itemOffset: number = 0, endOffset: number = 21) => {
+	public static readonly getItems = () => {
 		const cartIds: Cart[] = this.get()
 		const cartItems: PlaceCoord[] = []
 		cartIds.map((cartElement) => {
 			cartItems.push(data.filter(value => value.id == cartElement.id)[0])
 		})
-		return cartItems.reverse().slice(itemOffset, endOffset)
+		return cartItems.reverse()
 	}
 
 }

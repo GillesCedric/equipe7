@@ -23,7 +23,7 @@ export default class Map extends React.Component<PropsMap, StateMap> {
   }
 
   componentDidMount = () => {
-    PlacesModel.getCoordinatesOfCities()
+    //PlacesModel.getCoordinatesOfCities()
     const points = PlacesModel.getPlacesWithAllCities()
     this.setState({ points: points })
   }
