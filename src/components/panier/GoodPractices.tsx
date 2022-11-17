@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactPaginate from 'react-paginate'
 import CartModel from '../../models/Cart'
-import { GoodPractices as GoodPracticesType } from '../../models/GoodPractices'
+import { GoodPractices as GoodPracticesType } from '../../models/Places'
 import GoodPractice from './GoodPractice'
 
 interface PropsGoodPractices {
@@ -56,11 +56,11 @@ export default class GoodPractices extends React.Component<PropsGoodPractices, S
   render: () => React.ReactNode = () => {
     return <div className='bg-gray-100 w-full pt-28'>
       <div className='flex justify-end mr-8 mt-5'>
-      <button name='report' type='button' role='button' className="px-6 py-3 bg-blue-600 text-white font-semibold text-base leading-tight uppercase rounded-sm shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" >Générer un rapport</button>
+        <button name='report' type='button' role='button' className="px-6 py-3 bg-blue-600 text-white font-semibold text-base leading-tight uppercase rounded-sm shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" >Générer un rapport</button>
       </div>
       <GoodPractice goodPractices={this.state.currentItems} updater={id => this.update(id)} />
       <div className='flex justify-end mr-8 my-5'>
-      <button name='report' type='button' role='button' className="px-6 py-3 bg-blue-600 text-white font-semibold text-base leading-tight uppercase rounded-sm shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" >Générer un rapport</button>
+        <button name='report' type='button' role='button' className="px-6 py-3 bg-blue-600 text-white font-semibold text-base leading-tight uppercase rounded-sm shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out" >Générer un rapport</button>
       </div>
       <ReactPaginate
         breakLabel="..."

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import CartModel from '../models/Cart'
-import { GoodPractices as GoodPracticesType } from '../models/GoodPractices'
+import { GoodPractices as GoodPracticesType } from '../models/Places'
 
 interface PropsGoodPractices {
   goodPractices: GoodPracticesType[]

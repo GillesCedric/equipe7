@@ -1,5 +1,5 @@
 import React from 'react'
-import { GoodPractices as GoodPracticesType } from '../models/GoodPractices'
+import { GoodPractices as GoodPracticesType } from '../models/Places'
 import GoodPractice from './GoodPractice'
 
 interface PropsGoodAccordion {

@@ -2,13 +2,14 @@ import type { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import Head from 'next/head'
-import GoodPracticesModel, { GoodPractices as GoodPracticesType } from '../src/models/GoodPractices'
+//import PlacesModel, { GoodPractices as GoodPracticesType } from '../src/models/Places'
 
 const Header = dynamic(() => import('../src/components/Header'), { suspense: true })
-const Sidebar = dynamic(() => import('../src/components/SideBar'), { suspense: true })
+const Main = dynamic(() => import('../src/components/Main'), { ssr: false })
 //const GoodPractices = dynamic(() => import('../src/components/index/GoodPractices'), { suspense: true })
 const Footer = dynamic(() => import('../src/components/Footer'), { suspense: true })
-const Home: NextPage<{ goodPractices: GoodPracticesType[], totalItems: number }> = ({ goodPractices, totalItems }) => {
+const Map = dynamic(() => import('../src/components/Map'), { ssr: false })
+const Home: NextPage = () => {
 
   return <>
     <Head>
@@ -20,18 +21,14 @@ const Home: NextPage<{ goodPractices: GoodPracticesType[], totalItems: number }>
       <link rel="manifest" href="/site.webmanifest"></link>
     </Head>
     <Suspense fallback={`Loading...`}>
-      <Header />
-      {//<GoodPractices itemsPerPage={21} goodPractices={goodPractices} totalItems={totalItems} />
-      }
-      <Sidebar />
-      <Footer />
+      <Main />
     </Suspense>
   </>
 }
 
 export default Home
 
-export async function getStaticProps() {
+/* export async function getStaticProps() {
 
   const goodPractices = GoodPracticesModel.getGoodPractices(),
     totalItems = GoodPracticesModel.getGoodPracticesSize()
@@ -42,4 +39,4 @@ export async function getStaticProps() {
       totalItems
     }
   }
-}
+} */
