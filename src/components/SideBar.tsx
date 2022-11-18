@@ -36,7 +36,7 @@ export default class SideBar extends React.Component<PropsSideBar, StateSideBar>
 			{
 				this.props.isOpen && <>
 					<div id="drawer-example" className="overflow-x-hidden absolute z-40 h-5/6 p-4 overflow-y-auto w-80 bg-gray-800" tabIndex={-1} aria-labelledby="drawer-label">
-						<button onClick={() => this.props.updater(false)} type="button" data-drawer-dismiss="drawer-example" aria-controls="drawer-example" className="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center hover:bg-gray-600 hover:text-white" >
+						<button aria-label='close-menu' onClick={() => this.props.updater(false)} type="button" data-drawer-dismiss="drawer-example" aria-controls="drawer-example" className="text-gray-400 bg-transparent rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center hover:bg-gray-600 hover:text-white" >
 							<svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
 							<span className="sr-only">Close menu</span>
 						</button>

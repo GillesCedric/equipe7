@@ -72,6 +72,7 @@ export default class Modal extends React.Component<PropsModal, StateModal>{
                     Votre Panier
                   </h3>
                   <button
+                  aria-label='close-cart'
                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => this.props.updater(false)}
@@ -96,6 +97,7 @@ export default class Modal extends React.Component<PropsModal, StateModal>{
 
                 <a href="mailto:design4green@etik.com?subject=Demande de devis&body=Bonjour %0D%0A%0D%0AJe vous écris ce mail pour vous demander un devis en fonction de mon panier. %0D%0ACi-joint la version pdf de celui-ci. %0D%0A%0D%0ACordialement.">
                     <button
+                    aria-label='devis'
                       className="bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-2  py-3 mr-4 md:mr-5  md:px-5 h-11 rounded shadow hover:shadow-lg outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150 flex"
                       type="button"
                     >
@@ -107,6 +109,7 @@ export default class Modal extends React.Component<PropsModal, StateModal>{
                   </a>
 
                   <button
+                  aria-label='download-report'
                     className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-4 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 flex"
                     type="button"
                     onClick={() => this.generatePDF()}
