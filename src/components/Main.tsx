@@ -3,7 +3,7 @@ import Sidebar from './SideBar'
 import Map from './Map'
 import Header from './Header'
 import Footer from './Footer'
-import PlacesModel, { Coordinates, List } from '../models/Places'
+import PlacesModel, { CartPoint, Coordinates, FiltersValues, List } from '../models/Places'
 import Modal from './Cart'
 
 
@@ -16,28 +16,46 @@ interface StateMain {
 	cartIsOpen: boolean
 	items: List[]
 	searchTerm: string | undefined | Coordinates
+	filtersValues: FiltersValues[] | null
+	points: CartPoint[]
+  cities: string[]
 }
 
 export default class Main extends React.Component<PropsMain, StateMain>{
+	private map: L.Map | null = null
 	constructor(props: PropsMain) {
 		super(props)
 		this.state = {
 			sidebarIsOpen: true,
 			cartIsOpen: false,
 			items: [],
-			searchTerm: ''
+			searchTerm: '',
+			filtersValues: null,
+			points: [],
+      cities: [],
 		}
+		//this.map = React.createRef();
 	}
 
 	componentDidMount = () => {
 		const items = PlacesModel.getList()
-		this.setState({ items: items })
+		const points = PlacesModel.getPlacesWithAllCities()
+		this.setState({ items: items, points: points })
 	}
 
 	componentDidUpdate = () => {
-		const items = PlacesModel.getList(this.state.searchTerm)
-		console.log(this.state.searchTerm)
-		if (JSON.stringify(items) != JSON.stringify(this.state.items)) this.setState({ items: items })
+		const items = PlacesModel.getList(this.state.filtersValues, this.state.searchTerm)
+		if (JSON.stringify(items) != JSON.stringify(this.state.items)){
+			this.setState({ items: items, points: items.map(value => {
+				return {
+					cityName: value.ville,
+					totalItems: 0,
+					coordinates: value.coordinates
+				}
+			}) })
+			if( items.length == 1 && items[0] && items[0].ville != 'National') this.map?.flyTo([items[0].coordinates.latitude, items[0].coordinates.longitude], 12)
+			else this.map?.flyTo([46.603354, 1.8883335], 6)
+		} 
 	}
 
 	render = () => {
@@ -45,6 +63,8 @@ export default class Main extends React.Component<PropsMain, StateMain>{
 			<Header
 				updater={status => this.setState({ sidebarIsOpen: status })}
 				updater2={status => this.setState({ cartIsOpen: status })}
+				updater3={filtersValues => this.setState({ filtersValues: filtersValues })}
+				sidebarIsOpen={this.state.sidebarIsOpen}
 			/>
 			<Modal
 				isOpen={this.state.cartIsOpen}
@@ -61,7 +81,10 @@ export default class Main extends React.Component<PropsMain, StateMain>{
 					latitude: latitude,
 					longitude: longitude
 				}
-			})} />
+			})} 
+			mapRef={map => this.map = map}
+			points={this.state.points}
+			/>
 			<Footer />
 		</>
 	}

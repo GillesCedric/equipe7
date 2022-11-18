@@ -20,9 +20,15 @@ export type Place = {
 }
 
 export enum Filters {
-	family = 'Family',
-	incontournable = 'Incontournable',
-	type = 'Type'
+	formation = 'Formation',
+	modalite = 'ModaliteAccess',
+	ville = 'Localisation',
+	validation = 'ValidationAcquis'
+}
+
+export type FiltersValues = {
+	filter: Filters
+	value: string
 }
 
 export type Coordinates = {
@@ -47,6 +53,7 @@ export type List = {
 	formation: string
 	etablissement: string
 	ville: string
+	coordinates: Coordinates
 }
 
 export default abstract class PlacesModel {
@@ -90,36 +97,47 @@ export default abstract class PlacesModel {
 		return places
 	}
 
-	public static readonly getList = (term?: string | Coordinates) => {
+	public static readonly getList = (FiltersValues?: FiltersValues[] | null, term?: string | Coordinates) => {
+		let filteredData = data2
+		if(FiltersValues && FiltersValues != null){
+			FiltersValues.map(filtervalue => {
+				if(filtervalue.value != '---'){
+					filteredData = filteredData.filter(data => data.place[filtervalue.filter] == filtervalue.value )
+				}
+			})
+		}
 		const list: List[] = []
 		if(typeof term == 'string' && term != ''){
-			data2.filter(value => 
+			filteredData.filter(value => 
 				(value.place.IntituleFormation.toLowerCase().includes(term.toLowerCase()) || value.place.LibelleEtablissement.toLowerCase().includes(term.toLowerCase()) || value.place.Localisation.toLowerCase().includes(term.toLowerCase()) || value.place.NomOrganisme.toLowerCase().includes(term.toLowerCase())) 
 			).map(value => {
 				list.push({
 					id: value.id,
 					formation: value.place.IntituleFormation,
 					etablissement: value.place.LibelleEtablissement != '' ? value.place.LibelleEtablissement : value.place.NomOrganisme,
-					ville: value.place.Localisation
+					ville: value.place.Localisation,
+					coordinates: value.place.Localisation == 'National' ? {latitude: 46.603354, longitude: 1.8883335} : value.coordinates
 				})
 			})
 		}else if(typeof term == 'object'){
-			data2.filter(value => (value.coordinates.latitude == term.latitude && value.coordinates.longitude == term.longitude)
+			filteredData.filter(value => (value.coordinates.latitude == term.latitude && value.coordinates.longitude == term.longitude)
 			).map(value => {
 				list.push({
 					id: value.id,
 					formation: value.place.IntituleFormation,
 					etablissement: value.place.LibelleEtablissement != '' ? value.place.LibelleEtablissement : value.place.NomOrganisme,
-					ville: value.place.Localisation
+					ville: value.place.Localisation,
+					coordinates: value.coordinates
 				})
 			})
 		}else{
-			data2.map(value => {
+			filteredData.map(value => {
 				list.push({
 					id: value.id,
 					formation: value.place.IntituleFormation,
 					etablissement: value.place.LibelleEtablissement != '' ? value.place.LibelleEtablissement : value.place.NomOrganisme,
-					ville: value.place.Localisation
+					ville: value.place.Localisation,
+					coordinates: value.coordinates
 				})
 			})
 		}
@@ -145,8 +163,8 @@ export default abstract class PlacesModel {
 			data2.map(value => {
 				if (city == value.place.Localisation) {
 					place.totalItems = place.totalItems + 1
-					place.coordinates.latitude = value.coordinates.latitude
-					place.coordinates.longitude = value.coordinates.longitude
+					place.coordinates.latitude = value.place.Localisation == 'National' ? 46.603354 : value.coordinates.latitude
+					place.coordinates.longitude = value.place.Localisation == 'National' ? 1.8883335 : value.coordinates.longitude
 				}
 			})
 			places.push(place)
@@ -158,6 +176,14 @@ export default abstract class PlacesModel {
 		)
 		//console.log(places)
 		return places
+	}
+
+	public static readonly getFilterItems = (filter: Filters) => {
+		//@ts-ignore
+		const values = [...new Set(data2.map(value => {
+			if(value.place[filter] != '') return value.place[filter][0].toUpperCase()+value.place[filter].slice(1)
+		}))]
+		return values
 	}
 
 }

@@ -71,22 +71,17 @@ export default class Modal extends React.Component<PropsModal, StateModal>{
                   <h3 className="text-2xl font-semibold">
                     Votre Panier
                   </h3>
-                  <input type="email" name="mail" placeholder="Adresse mail pour devis" className="placeholder:italic placeholder:text-slate-400 block bg-white w-30 border border-slate-300 rounded-md py-2 ml-5 pl-5 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm" />
-                  <a href="mailto:design4green@etik.com?subject=Demande de devis&body=Bonjour %0D%0A%0D%0AJe vous écris ce mail pour vous demander un devis en fonction de mon panier. %0D%0ACi-joint la version pdf de celui-ci. %0D%0A%0D%0ACordialement.">
-                    <button
-                      className="bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-5 py-3  h-10 rounded shadow hover:shadow-lg outline-none focus:outline-none ml-1  mb-1 ease-linear transition-all duration-150 flex"
-                      type="button"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width={14} height={17} fill="white" viewBox="0 0 384 512"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z" />
-                      </svg>
-                      <span className="pl-2">Demander devis</span>
-
-                    </button>
-                  </a>
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => this.props.updater(false)}
+                  >
+                    Fermer
+                  </button>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto overflow-y-auto h-64">
-                  <ul id="report" className="my-4 space-y-3 ">
+                <div className="relative md:p-6 md:flex-auto overflow-y-auto h-80">
+                  <ul id="report" className="md:my-4 md:space-y-3 ">
                     {
                       this.state.items.length > 0 ?
                         this.state.items.map((item, index) => {
@@ -97,17 +92,22 @@ export default class Modal extends React.Component<PropsModal, StateModal>{
                     }
                   </ul></div>
                 {/*footer*/}
-                <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                  <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    type="button"
-                    onClick={() => this.props.updater(false)}
-                  >
-                    Fermer
-                  </button>
+                <div className="flex items-center md:items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+
+                <a href="mailto:design4green@etik.com?subject=Demande de devis&body=Bonjour %0D%0A%0D%0AJe vous écris ce mail pour vous demander un devis en fonction de mon panier. %0D%0ACi-joint la version pdf de celui-ci. %0D%0A%0D%0ACordialement.">
+                    <button
+                      className="bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-2  py-3 mr-4 md:mr-5  md:px-5 h-11 rounded shadow hover:shadow-lg outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150 flex"
+                      type="button"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width={14} height={17} fill="white" viewBox="0 0 384 512"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z" />
+                      </svg>
+                      <span className="pl-2">Demander devis</span>
+
+                    </button>
+                  </a>
 
                   <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-5 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 flex"
+                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-4 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 flex"
                     type="button"
                     onClick={() => this.generatePDF()}
                   >
