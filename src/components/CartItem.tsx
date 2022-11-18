@@ -29,7 +29,7 @@ export default class CartItem extends React.Component<PropsCartItem, StateCartIt
           <p className=" text-sm">Par : {this.props.item.place.LibelleEtablissement != '' ? this.props.item.place.LibelleEtablissement : this.props.item.place.NomOrganisme}</p>
           <p className=" text-sm">Ville : {this.props.item.place.Localisation}</p>
           <p className="">Durée : {this.props.item.place.Duree} j</p>
-          <p className="">Modalité d'accès : {this.props.item.place.ModaliteAccess}</p>
+          <p className="">{"Modalité d'accès"} : {this.props.item.place.ModaliteAccess}</p>
           <p className="text-sm">URL du site : <span className="text-blue-500">{this.props.item.place.Url}</span></p>
         </div>
         <span className="inline-flex items-center justify-center px-2 py-0.5 ml-3 text-xs font-medium text-gray-500  rounded">
