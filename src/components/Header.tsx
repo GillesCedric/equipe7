@@ -31,7 +31,7 @@ export default class Header extends React.Component<PropsHeader, { isOpen: boole
 							</div>
 						</div> : <div className='flex cursor-pointer'>
 							<div className="text-center text-base ml-16">
-								DESIGN 4 GREEN
+								<h1>DESIGN 4 GREEN</h1>
 							</div>
 						</div>
 					}

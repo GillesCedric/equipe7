@@ -56,6 +56,10 @@ export default class Modal extends React.Component<PropsModal, StateModal>{
 
   }
 
+  private readonly mailTo = () => {
+    window.location.href = "mailto:design4green@etik.com?subject=Demande de devis&body=Bonjour %0D%0A%0D%0AJe vous écris ce mail pour vous demander un devis en fonction de mon panier. %0D%0ACi-joint la version pdf de celui-ci. %0D%0A%0D%0ACordialement."
+  }
+
   render = () => {
     return (
       <>
@@ -72,7 +76,7 @@ export default class Modal extends React.Component<PropsModal, StateModal>{
                     Votre Panier
                   </h3>
                   <button
-                  aria-label='close-cart'
+                    aria-label='close-cart'
                     className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
                     onClick={() => this.props.updater(false)}
@@ -94,22 +98,20 @@ export default class Modal extends React.Component<PropsModal, StateModal>{
                   </ul></div>
                 {/*footer*/}
                 <div className="flex items-center md:items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-
-                <a href="mailto:design4green@etik.com?subject=Demande de devis&body=Bonjour %0D%0A%0D%0AJe vous écris ce mail pour vous demander un devis en fonction de mon panier. %0D%0ACi-joint la version pdf de celui-ci. %0D%0A%0D%0ACordialement.">
-                    <button
-                    aria-label='devis'
-                      className="bg-blue-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-2  py-3 mr-4 md:mr-5  md:px-5 h-11 rounded shadow hover:shadow-lg outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150 flex"
-                      type="button"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" width={14} height={17} fill="white" viewBox="0 0 384 512"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z" />
-                      </svg>
-                      <span className="pl-2">Demander devis</span>
-
-                    </button>
-                  </a>
-
                   <button
-                  aria-label='download-report'
+                    disabled={!(this.state.items.length > 0)}
+                    aria-label='devis'
+                    className="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-sm px-2  py-3 mr-4 md:mr-5  md:px-5 h-11 rounded shadow hover:shadow-lg outline-none focus:outline-none  mb-1 ease-linear transition-all duration-150 flex"
+                    type="button"
+                    onClick={event => this.mailTo()}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width={14} height={17} fill="white" viewBox="0 0 384 512"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z" />
+                    </svg>
+                    <span className="pl-2">Demander devis</span>
+                  </button>
+                  <button
+                    disabled={!(this.state.items.length > 0)}
+                    aria-label='download-report'
                     className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-4 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 flex"
                     type="button"
                     onClick={() => this.generatePDF()}
